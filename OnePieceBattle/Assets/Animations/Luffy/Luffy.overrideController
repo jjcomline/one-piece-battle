@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Luffy
+  m_Controller: {fileID: 9100000, guid: 0609e9cb992ad4c4991066b7198e4a39, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7b42c7f8a66364941841afdc3b59eac8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 11b7296cf70bc9f4fa2522e040d4412b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 22800aff602c4a2449084efe8ebbc99d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 46797fa2afdc6f0419780fd18ecc5956, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: be77c35a167cd794ba8d8fdc78480223, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 46c47a1bd893b6e49a17c76e80f40c27, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5b58e333d17890b4fbd181736f77b8a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2a1dc8f2989a55f42b48bd1b6fbda50a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1d28f7bcdbbe6bb46a0b1698861b6720, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6531f5a8db98b244f80b4fc0d4425a38, type: 2}

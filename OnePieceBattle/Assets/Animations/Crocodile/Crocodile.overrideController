@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Crocodile
+  m_Controller: {fileID: 9100000, guid: 0609e9cb992ad4c4991066b7198e4a39, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7b42c7f8a66364941841afdc3b59eac8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c95a6e239f97dc346a0b928c87c0be31, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 22800aff602c4a2449084efe8ebbc99d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ac74145aaf0fb5e4a99eb5096bd9af7b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: be77c35a167cd794ba8d8fdc78480223, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c49d77e71ddd99b4e83c45c6cb28e18a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5b58e333d17890b4fbd181736f77b8a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 48cdb6fcefb10274c9f9633f8e696b4b, type: 2}
