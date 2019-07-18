@@ -62,6 +62,7 @@
      <Compile Include="Assets\scripts\HealthBar.cs" />
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
      <Compile Include="Assets\scripts\PowerBar.cs" />
+     <Compile Include="Assets\Scripts\Hit_Controller.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/gianluca/Desktop/opBattle/OnePieceBattle/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

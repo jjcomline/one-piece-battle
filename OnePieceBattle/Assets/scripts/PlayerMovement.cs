@@ -6,13 +6,17 @@ public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
 	public Animator animator;
+	private Hit_Controller Hit_Controller;
 
 	public float runSpeed = 40f;
 
-	float horizontalMove = 0f;
+	private float horizontalMove = 0f;
 	bool jump = false;
 	bool crouch = false;
-
+	void Start()
+	{
+        Hit_Controller = gameObject.GetComponentInChildren<Hit_Controller>(true);
+	}
 	// Update is called once per frame
 	void Update () {
 
@@ -33,7 +37,18 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			crouch = false;
 		}
-
+		
+		if (Input.GetButtonDown("Fire1")){
+			Hit_Controller.SetAttack(1,(transform.localScale.x > 0));
+			animator.SetFloat("Move_n",.1f);
+			animator.SetTrigger("Attack");
+		}
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Hit_Controller.SetAttack(2,(transform.localScale.x > 0));
+            animator.SetFloat("Move_n", .6f);
+            animator.SetTrigger("Attack");
+        }
 	}
 
 	public void OnLanding ()
