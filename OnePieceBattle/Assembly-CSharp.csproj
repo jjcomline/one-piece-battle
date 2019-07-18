@@ -58,6 +58,7 @@
      <Compile Include="Assets\old_Assets\scripts\CharControl.cs" />
      <Compile Include="Assets\old_Assets\scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\CharacterController2D.cs" />
+     <Compile Include="Assets\Scripts\Hit_Controller.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Matteo/Documents/one_piece_battle/OnePieceBattle/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
