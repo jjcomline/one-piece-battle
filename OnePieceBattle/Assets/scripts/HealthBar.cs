@@ -22,7 +22,6 @@ public class HealthBar : MonoBehaviour
             animator.SetInteger("Danger_1", health);
         }
         if (health <= 25){
-            Debug.Log("hhh");
             animator.SetInteger("Danger_1", health);
         }
         bar.localScale = new Vector3 ((float)health/100, 1f);

@@ -9,13 +9,27 @@ public class GameHandler : MonoBehaviour {
     [SerializeField] private PowerBar PowerBarPlayer; 
     [SerializeField] private PowerBar PowerBarEnemy; 
 
-    int i = 100; 
+    public Text timer;
+    private float startTime;
+
+    private int i = 100; 
+
+    private void Start() {
+        startTime = Time.time;
+    }
 
     private void Update(){
         Damage(1, true);
         Damage(1, false);
         Power(1, true);
         Power(1, false);
+
+        float t = Time.time - startTime;
+
+        string minutes = ((int)t/60).ToString();
+        string seconds = (t % 60).ToString("f2");
+
+        timer.text = minutes + ":" + seconds;
     }
 
     private void Damage (int hit, bool isEnemy) {
