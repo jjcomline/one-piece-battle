@@ -1,33 +1,30 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
     public Transform bar;
-    private int health = 100;
+    public int health = 100;
+    private int maxHealth = 100;
 
     public Animator animator;
-    
-    private void Start() {
-        //bar_color = GetComponent<Renderer>();
-    }
 
-    public void SetSize(int sizeNormalized) {
-        health -= sizeNormalized;            
-        if (health < 71 && health > 40) {
-            animator.SetInteger("Danger_1", health);
-        }
-        if (health <= 40 && health > 25 ){
-            animator.SetInteger("Danger_1", health);
-        }
-        if (health <= 25){
-            animator.SetInteger("Danger_1", health);
-        }
-        bar.localScale = new Vector3 ((float)health/100, 1f);
-    }
 
-    public int getHealth() {
-        return health;
-    } 
+    void SetSize(float sizeNormalized)
+    {
+        animator.SetInteger("Danger_1", (int)(sizeNormalized*100));
+        bar.localScale = new Vector3(sizeNormalized, 1f);
+    }
+    public void resetHealth(int maxHealth) => health = this.maxHealth = maxHealth;
+    public bool setHealth(int damage)
+    {
+        int newHealth = health - damage;
+        if (newHealth > maxHealth)
+            health = maxHealth;
+        else if(newHealth < 0) health = 0;
+        else health = newHealth;
+        SetSize((float)health / maxHealth);
+        return (health > 0);
+    }
 }

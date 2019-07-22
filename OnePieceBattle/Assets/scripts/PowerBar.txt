@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PowerBar : MonoBehaviour
+{
+    public Transform bar;
+
+    public Animator animator;
+    
+    private void Start() {
+    }
+
+    public void SetSize(int sizeNormalized) {
+        if (sizeNormalized == 100)
+            animator.SetBool("Full", true);
+        bar.localScale = new Vector3((float)sizeNormalized / 100f, 1f);
+    }
+
+    public void resetPower() {
+        bar.localScale = new Vector3(0f, 1f);
+    }
+}

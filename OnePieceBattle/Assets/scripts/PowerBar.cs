@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,28 +6,34 @@ public class PowerBar : MonoBehaviour
 {
     public Transform bar;
     private int power = 0;
+    private int maxPower = 100;
 
     public Animator animator;
     
     private void Start() {
     }
 
-    public void SetSize(int sizeNormalized) {
-        power += sizeNormalized;
-        if (power == 100)
+    private void SetSize(float sizeNormalized) {
+        if (power == 1)
             animator.SetBool("Full", true);
-        bar.localScale = new Vector3 ((float)power/100, 1f);
+        else animator.SetBool("Full", false);
+        bar.localScale = new Vector3 (sizeNormalized, 1f);
     }
 
-    public int getPower() {
-        return power;
-    } 
+    public bool hasEnoughPower(int energy) => power + energy >= 0;
 
-    private void resetPower() {
+    public void resetPower(int maxPower){
         power = 0;
+        this.maxPower = maxPower;
     }
 
-    private void minusPower(int energy) {
-        power -= energy;
+    public void setPower(int energy) {
+        if(!hasEnoughPower(energy))
+            return;
+        int newPower = power + energy;
+        if(newPower > maxPower)
+            power = maxPower;
+        else power = newPower;
+        SetSize((float)power/maxPower);
     }
 }

@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+interface IChar{
+    private float runSpeed;
+
+    float getSpeed()=>runSpeed;
+
+    void move1(GameObject gmOb);
+    void move2(GameObject gmOb);
+}
