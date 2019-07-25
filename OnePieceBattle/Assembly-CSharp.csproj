@@ -58,15 +58,14 @@
      <Compile Include="Assets\old_Assets\scripts\CharControl.cs" />
      <Compile Include="Assets\old_Assets\scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\CharacterController2D.cs" />
+     <Compile Include="Assets\Scripts\Events.cs" />
      <Compile Include="Assets\Scripts\GameHandler.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Hit_Controller.cs" />
+     <Compile Include="Assets\Scripts\IChar.cs" />
      <Compile Include="Assets\Scripts\Luffy_Moves.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PowerBar.cs" />
-     <None Include="Assets\Scripts\PowerBar.txt" />
-     <None Include="Assets\Scripts\HealthBar.txt" />
-     <None Include="Assets\Scripts\IChar.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Matteo/Documents/one_piece_battle/OnePieceBattle/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

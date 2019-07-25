@@ -63,7 +63,7 @@ AnimationClip:
       value: {fileID: -4862202410999657496, guid: 86871d61fccfd4942b6508b3d328d6a9,
         type: 3}
     - time: 0.16666667
-      value: {fileID: -8112206778375523547, guid: 86871d61fccfd4942b6508b3d328d6a9,
+      value: {fileID: 8440635419298809345, guid: 86871d61fccfd4942b6508b3d328d6a9,
         type: 3}
     - time: 0.25
       value: {fileID: 1719616239416787857, guid: 86871d61fccfd4942b6508b3d328d6a9,
@@ -78,7 +78,7 @@ AnimationClip:
       value: {fileID: 8732319820245475300, guid: 86871d61fccfd4942b6508b3d328d6a9,
         type: 3}
     - time: 0.5833333
-      value: {fileID: -1436346290708500584, guid: 86871d61fccfd4942b6508b3d328d6a9,
+      value: {fileID: -5450205376878850838, guid: 86871d61fccfd4942b6508b3d328d6a9,
         type: 3}
     - time: 0.6666667
       value: {fileID: 8265485869431557893, guid: 86871d61fccfd4942b6508b3d328d6a9,
@@ -126,12 +126,12 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: -152423168340739741, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: -4862202410999657496, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
-    - {fileID: -8112206778375523547, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
+    - {fileID: 8440635419298809345, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: 1719616239416787857, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: 2725898127428685364, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: 1098548449431318206, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: 8732319820245475300, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
-    - {fileID: -1436346290708500584, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
+    - {fileID: -5450205376878850838, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: 8265485869431557893, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: -1436346290708500584, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}
     - {fileID: -8240397491675328726, guid: 86871d61fccfd4942b6508b3d328d6a9, type: 3}

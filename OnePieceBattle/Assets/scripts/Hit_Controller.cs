@@ -7,14 +7,10 @@ public class Hit_Controller : MonoBehaviour
 {
     private int move = 1;
     private List<int> hit_objects;
-
-    [Header("Events")]
-    [Space]
     public UnityEvent OnMoveFinished;
-    [System.Serializable]
-    public class ObjectEvent : UnityEvent<GameObject> { }
     public ObjectEvent Move1;
     public ObjectEvent Move2;
+    public ObjectEvent Move3;
 
     void Start(){
         if (OnMoveFinished == null)
@@ -23,6 +19,8 @@ public class Hit_Controller : MonoBehaviour
             Move1 = new ObjectEvent();
         if (Move2 == null)
             Move2 = new ObjectEvent();
+        if (Move3 == null)
+            Move3 = new ObjectEvent();
 
     }
     void OnEnable()
@@ -45,6 +43,8 @@ public class Hit_Controller : MonoBehaviour
                 Move1.Invoke(gmOb);
             else if (move == 2)
                 Move2.Invoke(gmOb);
+            else if(move == 3)
+                Move3.Invoke(gmOb);
         }
     }
 

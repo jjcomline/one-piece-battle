@@ -14,26 +14,27 @@ public class PowerBar : MonoBehaviour
     }
 
     private void SetSize(float sizeNormalized) {
-        if (power == 1)
+        if (sizeNormalized == 1)
             animator.SetBool("Full", true);
         else animator.SetBool("Full", false);
         bar.localScale = new Vector3 (sizeNormalized, 1f);
     }
 
-    public bool hasEnoughPower(int energy) => power + energy >= 0;
+    private bool hasEnoughPower(int energy) => power + energy >= 0;
 
     public void resetPower(int maxPower){
         power = 0;
         this.maxPower = maxPower;
     }
 
-    public void setPower(int energy) {
+    public bool setPower(int energy) {
         if(!hasEnoughPower(energy))
-            return;
+            return false;
         int newPower = power + energy;
         if(newPower > maxPower)
             power = maxPower;
         else power = newPower;
         SetSize((float)power/maxPower);
+        return true;
     }
 }
