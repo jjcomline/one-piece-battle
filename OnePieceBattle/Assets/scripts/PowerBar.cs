@@ -5,8 +5,8 @@ using UnityEngine;
 public class PowerBar : MonoBehaviour
 {
     public Transform bar;
-    private int power = 0;
-    private int maxPower = 100;
+    public int power = 0;
+    public int maxPower = 100;
 
     public Animator animator;
     

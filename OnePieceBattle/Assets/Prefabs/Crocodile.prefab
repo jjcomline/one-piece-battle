@@ -90,6 +90,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: ObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  Move3:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!61 &6005671475656731880
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,6 +135,7 @@ GameObject:
   - component: {fileID: 5624652828565224521}
   - component: {fileID: 5624652828565224523}
   - component: {fileID: 2986916655769446761}
+  - component: {fileID: 6123312926330365663}
   m_Layer: 8
   m_Name: Crocodile
   m_TagString: Untagged
@@ -305,12 +310,12 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 5624652828565224524}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8de25e634c72fb5459e529670d8977f6, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.025}
-  m_Size: {x: 0.02, y: 0.05}
+  m_Offset: {x: 0, y: 0.035116445}
+  m_Size: {x: 0.026825532, y: 0.07023289}
   m_Direction: 0
 --- !u!60 &2986916655769446761
 PolygonCollider2D:
@@ -319,7 +324,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5624652828565224524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -342,6 +347,18 @@ PolygonCollider2D:
       - {x: 0.009876275, y: 0.009927459}
       - {x: 0.001, y: 0.033}
       - {x: -0.006, y: 0.033}
+--- !u!114 &6123312926330365663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624652828565224524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b027179efe40945f9a58744b63b930cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5624652828727311175
 GameObject:
   m_ObjectHideFlags: 0

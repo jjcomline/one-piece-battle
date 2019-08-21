@@ -13,4 +13,5 @@ public interface IChar
     int Health { get;}
     int Power { get;}
     float JumpForce{get;}
+    bool IsPlayer { set;} 
 }
