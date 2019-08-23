@@ -8,12 +8,12 @@ public class Luffy_Moves : MonoBehaviour,IChar
     int energy = 5;
     int move = 1;
     GameHandler gameHandler;
-    GameObject bullet;
+    public GameObject bullet;
     Collider2D coll;
     const float runSpeed = 30f;
     const float jumpForce = 350f;
     const int maxHealth = 150;
-    const int maxPower = 200;
+    const int maxPower = 100;
     bool isPlayer;
 
     public GameHandler GameHandler {set => gameHandler = value; }

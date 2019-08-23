@@ -8,14 +8,14 @@ public class Crocodile_Moves : MonoBehaviour, IChar
     int energy = 5;
     int move = 1;
     GameHandler gameHandler;
-    GameObject bullet;
+    public GameObject bullet;
     Collider2D coll;
-    const float runSpeed = 30f;
-    const float jumpForce = 350f;
+    const float runSpeed = 20f;
+    const float jumpForce = 300f;
     const int maxHealth = 150;
-    const int maxPower = 200;
+    const int maxPower = 100;
     bool isPlayer;
-
+     
     public GameHandler GameHandler {set => gameHandler = value; }
     public float RunSpeed { get => runSpeed;}
     public int Health { get => maxHealth;}
@@ -26,7 +26,7 @@ public class Crocodile_Moves : MonoBehaviour, IChar
 
     public void Move1(GameObject gmOb)
     {
-        gameHandler.Attack(damage, energy, isPlayer);
+        StartCoroutine(Delay(0.1f));
     }
     public void Move2(GameObject gmOb)
     {
@@ -37,46 +37,40 @@ public class Crocodile_Moves : MonoBehaviour, IChar
             facingRight = -1;
         Rigidbody2D rb2d = gmOb.GetComponent<Rigidbody2D>();
         rb2d.AddForce(new Vector2(facingRight * 5f, 2f), ForceMode2D.Impulse);
-        gameHandler.Attack(damage,energy, isPlayer);
+        StartCoroutine(Delay(0.7f));
     }
     public void Move3(GameObject gmOb)
     {   
-        float facingRight;
-        if (transform.localScale.x > 0)
-            facingRight = 1f;
-        else
-            facingRight = -1f;
         Vector2 position = gmOb.transform.position;
-        this.transform.position = position - new Vector2(facingRight, 0f);
-        StartCoroutine(Delay());
+        this.transform.position = position - new Vector2(0f, -1f);
+        StartCoroutine(Delay(3f));
     }
     public bool SetAttack(int a)
     {
         move = a;
+        bullet.GetComponent<Hit_Controller>().move = a;
         if (coll != null)
             Destroy(coll);
+        CircleCollider2D circle;
         BoxCollider2D box;
         if (move == 1)
         {
             damage = 3;
             energy = 5;
-            box = Bullet.AddComponent<BoxCollider2D>();
-            box.size = new Vector2(.028f, .01f);
-            box.offset = new Vector2(.021f, .032f);
-            coll = box;
+            circle = Bullet.AddComponent<CircleCollider2D>();
+            circle.radius = .003f;
+            circle.offset = new Vector2(.0f, .04f);
+            coll = circle;
+            coll.isTrigger = true;
         }
         else if (move == 2)
         {
             damage = 15;
             energy = -20;
-            if (gameHandler.TryAttack(energy, isPlayer))
-            {
-                box = Bullet.AddComponent<BoxCollider2D>();
-                box.size = new Vector2(.03f, .02f);
-                box.offset = new Vector2(.0014f, .003f);
-                coll = box;
+            if (!gameHandler.TryAttack(energy, isPlayer))
+            {   
+                return false;
             }
-            else return false;
         }
         else if (move == 3)
         {   
@@ -89,18 +83,18 @@ public class Crocodile_Moves : MonoBehaviour, IChar
             if (gameHandler.TryAttack(energy, isPlayer))
             {   
                 Move3(GameObject.FindWithTag(who));
+                coll.isTrigger = true;
             }
             else return false;
 
         }
-        coll.isTrigger = true;
         return true;
 
     }
 
-    IEnumerator Delay()
+    IEnumerator Delay(float time)
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(time);
         gameHandler.Attack(damage, energy, isPlayer);
     }
 }

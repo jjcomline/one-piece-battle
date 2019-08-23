@@ -22526,10 +22526,10 @@ TextureImporter:
       name: Crocodile_879
       rect:
         serializedVersion: 2
-        x: 84
-        y: 1745
-        width: 68
-        height: 110
+        x: 81
+        y: 1740
+        width: 71
+        height: 115
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

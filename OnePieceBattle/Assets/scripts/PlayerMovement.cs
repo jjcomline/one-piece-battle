@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         controller.m_JumpForce = character.JumpForce;
         animator = this.gameObject.GetComponent<Animator>();
         character.GameHandler = GameObject.FindObjectOfType<GameHandler>();
-        character.Bullet = this.transform.GetChild(0).gameObject;
         Hit_Controller hit_Controller = character.Bullet.GetComponent<Hit_Controller>();
         hit_Controller.Move1 = new ObjectEvent();
         hit_Controller.Move1.AddListener(character.Move1);

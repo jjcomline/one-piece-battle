@@ -5,12 +5,13 @@ using UnityEngine.Events;
 
 public class Hit_Controller : MonoBehaviour
 {
-    private int move = 1;
+    public int move = 1;
     private List<int> hit_objects;
     public UnityEvent OnMoveFinished;
     public ObjectEvent Move1;
     public ObjectEvent Move2;
     public ObjectEvent Move3;
+
 
     void Start(){
         if (OnMoveFinished == null)
@@ -26,6 +27,10 @@ public class Hit_Controller : MonoBehaviour
     void OnEnable()
     {
         hit_objects = new List<int>();
+        if (move == 2)
+            this.GetComponent<Animator>().SetBool("Move2", true);
+        else
+            this.GetComponent<Animator>().SetBool("Move2", false);
     }
     void OnDisable()
     {
@@ -41,7 +46,7 @@ public class Hit_Controller : MonoBehaviour
             hit_objects.Add(id);
             if (move == 1)
                 Move1.Invoke(gmOb);
-            else if (move == 2)
+            else if (move == 2) 
                 Move2.Invoke(gmOb);
             else if(move == 3)
                 Move3.Invoke(gmOb);

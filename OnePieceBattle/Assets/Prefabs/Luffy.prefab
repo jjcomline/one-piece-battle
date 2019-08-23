@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2655012312791605698}
   - component: {fileID: 2655012312791605696}
   - component: {fileID: 2655012312791605697}
+  - component: {fileID: 4903021157417759379}
   m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093a98f2cd2ba8c4c8d4ca1f56b7f19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: 1
   OnMoveFinished:
     m_PersistentCalls:
       m_Calls:
@@ -90,6 +92,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: ObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  Move3:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!61 &2655012312791605697
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -116,6 +122,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.025, y: 0.015}
   m_EdgeRadius: 0
+--- !u!95 &4903021157417759379
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2655012312791605699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2655012313148275682
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54568e3f1020bd479513bb5c434b139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 2655012312791605699}
 --- !u!1 &2655012313192564517
 GameObject:
   m_ObjectHideFlags: 0

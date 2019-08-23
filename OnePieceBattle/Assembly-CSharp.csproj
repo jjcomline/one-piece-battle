@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Hit_Controller.cs" />
      <Compile Include="Assets\Scripts\IChar.cs" />
      <Compile Include="Assets\Scripts\Luffy_Moves.cs" />
+     <Compile Include="Assets\Scripts\Magellan_Moves.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PowerBar.cs" />
  <Reference Include="Unity.Timeline.Editor">
