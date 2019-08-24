@@ -12,7 +12,7 @@ public class Crocodile_Moves : MonoBehaviour, IChar
     Collider2D coll;
     const float runSpeed = 20f;
     const float jumpForce = 300f;
-    const int maxHealth = 150;
+    const int maxHealth = 250;
     const int maxPower = 100;
     bool isPlayer;
      
@@ -75,7 +75,7 @@ public class Crocodile_Moves : MonoBehaviour, IChar
         else if (move == 3)
         {   
             string who;
-            damage = 100;
+            damage = 18;
             energy = -70;
 
             who = isPlayer ? "enemy" : "player"; 
