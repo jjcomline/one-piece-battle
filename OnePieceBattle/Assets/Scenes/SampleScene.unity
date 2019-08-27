@@ -1998,7 +1998,7 @@ MonoBehaviour:
   HealthBarEnemy: {fileID: 2124308252}
   PowerBarPlayer: {fileID: 570341036}
   PowerBarEnemy: {fileID: 2124308254}
-  PlayerPrefab: {fileID: 5960370774572613004, guid: d2f039e1af19647579309b02413e305a,
+  PlayerPrefab: {fileID: 2655012313148275682, guid: 378fd0a9388e3f648a3dc05ad0167aed,
     type: 3}
   EnemyPrefab: {fileID: 2655012313148275682, guid: 378fd0a9388e3f648a3dc05ad0167aed,
     type: 3}

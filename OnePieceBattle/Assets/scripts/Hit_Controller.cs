@@ -27,10 +27,6 @@ public class Hit_Controller : MonoBehaviour
     void OnEnable()
     {
         hit_objects = new List<int>();
-        if (move == 2)
-            this.GetComponent<Animator>().SetBool("Move2", true);
-        else
-            this.GetComponent<Animator>().SetBool("Move2", false);
     }
     void OnDisable()
     {

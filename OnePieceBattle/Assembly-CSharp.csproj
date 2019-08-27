@@ -59,6 +59,7 @@
      <Compile Include="Assets\old_Assets\scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\CharacterController2D.cs" />
      <Compile Include="Assets\Scripts\Crocodile_Moves.cs" />
+     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\Events.cs" />
      <Compile Include="Assets\Scripts\GameHandler.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Magellan_Moves.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PowerBar.cs" />
+     <Compile Include="Assets\Scripts\Zoro_Moves.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/gianluca/Desktop/opBattle/OnePieceBattle/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

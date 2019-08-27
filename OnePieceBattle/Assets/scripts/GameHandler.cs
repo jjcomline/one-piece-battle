@@ -28,6 +28,9 @@ public class GameHandler : MonoBehaviour {
         IChar opponent = enemy.GetComponent<IChar>();
         PlayerMovement mover = player.AddComponent(typeof(PlayerMovement)) as PlayerMovement;
         mover.character = character;
+        EnemyMovement mover_enemy = enemy.AddComponent(typeof(EnemyMovement)) as EnemyMovement;
+        mover_enemy.character = opponent;
+        mover_enemy.player = player;
         HealthBarPlayer.resetHealth(character.Health);
         HealthBarEnemy.resetHealth(opponent.Health);
         PowerBarPlayer.resetPower(character.Power);

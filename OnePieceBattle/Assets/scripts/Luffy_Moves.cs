@@ -12,7 +12,7 @@ public class Luffy_Moves : MonoBehaviour,IChar
     Collider2D coll;
     const float runSpeed = 30f;
     const float jumpForce = 350f;
-    const int maxHealth = 150;
+    const int maxHealth = 250;
     const int maxPower = 100;
     bool isPlayer;
 
@@ -26,7 +26,7 @@ public class Luffy_Moves : MonoBehaviour,IChar
 
     public void Move1(GameObject gmOb)
     {
-        gameHandler.Attack(damage, energy, isPlayer);
+        StartCoroutine(Delay(0.6f));
     }
     public void Move2(GameObject gmOb)
     {
@@ -37,7 +37,7 @@ public class Luffy_Moves : MonoBehaviour,IChar
             facingRight = -1;
         Rigidbody2D rb2d = gmOb.GetComponent<Rigidbody2D>();
         rb2d.AddForce(new Vector2(facingRight * 5f, 2f), ForceMode2D.Impulse);
-        gameHandler.Attack(damage,energy, isPlayer);
+        StartCoroutine(Delay(1.2f));
     }
     public void Move3(GameObject gmOb)
     {   
@@ -48,7 +48,7 @@ public class Luffy_Moves : MonoBehaviour,IChar
             facingRight = -1f;
         Vector2 position = gmOb.transform.position;
         this.transform.position = position - new Vector2(facingRight, 0f);
-        StartCoroutine(Delay());
+        StartCoroutine(Delay(7));
     }
     public bool SetAttack(int a)
     {
@@ -98,9 +98,9 @@ public class Luffy_Moves : MonoBehaviour,IChar
 
     }
 
-    IEnumerator Delay()
+    IEnumerator Delay(float time)
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(time);
         gameHandler.Attack(damage, energy, isPlayer);
     }
 }
