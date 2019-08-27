@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     bool crouch = false;
 	bool attack = false;
     private int right;
-    private int isMoving;
+    private int action = 0; 
 
     void OnEnable()
     {
@@ -38,6 +39,8 @@ public class EnemyMovement : MonoBehaviour
         hit_Controller.Move3.AddListener(character.Move3);
         hit_Controller.OnMoveFinished = new UnityEvent();
         hit_Controller.OnMoveFinished.AddListener(OnMoveFinished);
+
+        InvokeRepeating("Action", 0.0f, 1.0f);
     }
     // Update is called once per frame
     public virtual void Update()
@@ -88,13 +91,34 @@ public class EnemyMovement : MonoBehaviour
         }*/
     }
 
+    private void Action () {
+        if (action%5 == 0 ){
+            crouch = true;
+        }
+        if (action%4 == 0 ){
+            jump = true;
+            animator.SetBool("IsJumping", true);
+        }
+        if (action%1 == 0) {
+            Moving();
+        }
+
+        crouch = false;
+        action++;
+
+    }
+
     public void Moving() {
         Vector2 position_player = player.transform.position;
         Vector2 position_enemy = this.transform.position;
-        
-        right = position_enemy.x<position_player.x ? 1 : -1;
+
+        if (Math.Abs(position_enemy.x - position_player.x) < 1) 
+            right = 0;
+        else 
+            right = position_enemy.x<position_player.x ? 1 : -1;
         
         horizontalMove = right * runSpeed;
+        Debug.Log(position_enemy.x - position_player.x);
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
     }
 
@@ -114,7 +138,7 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {   
         // Move our character
-		if(attack && right == 0)
+		if(attack)
 			return;
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
