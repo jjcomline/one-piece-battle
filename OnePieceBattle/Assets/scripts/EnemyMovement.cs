@@ -45,80 +45,51 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-       
+    }
 
-        /* if (Input.GetButtonDown("Jump"))
-        {
+    private void Action () {
+        if (action%5 == 0 && !attack){
+            crouch = true;
+        }
+        else crouch = false;
+
+        if (action%3 == 0 && !attack){
             jump = true;
             animator.SetBool("IsJumping", true);
         }
+        Moving();
+        action++;
+    }
 
-        if (Input.GetButtonDown("Crouch"))
-        {
-            crouch = true;
-        }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-			if(character.SetAttack(1) && !crouch)
+    public void Moving() {
+        Vector2 position_player = player.transform.position;
+        Vector2 position_enemy = this.transform.position;
+        float distance = position_enemy.x - position_player.x;
+        
+        right = position_enemy.x<position_player.x ? 1 : -1;
+        if (Math.Abs(distance) < 1) {
+            horizontalMove = right*0.001f;
+            if (UnityEngine.Random.Range(0f, 1f)<0.1f && character.SetAttack(2) && !crouch && !jump)
+            {
+                animator.SetFloat("Move_n", .5f);
+                animator.SetTrigger("Attack");
+                attack = true;
+            }
+            else if (character.SetAttack(3) && !crouch && !jump)
+            {
+                animator.SetFloat("Move_n", .9f);
+                animator.SetTrigger("Attack");
+                attack = true;
+            }
+            else if (character.SetAttack(1) && !crouch)
 			{
 				animator.SetFloat("Move_n", .2f);
 				animator.SetTrigger("Attack");
 				attack = true;
 			}
         }
-        if (Input.GetButtonDown("Fire2") && !crouch)
-        {
-            if(character.SetAttack(2))
-			{	
-				animator.SetFloat("Move_n", .5f);
-				animator.SetTrigger("Attack");
-				attack = true;
-			}
-        }
-        if (Input.GetButtonDown("Fire3") && !crouch)
-        {
-            if (character.SetAttack(3))
-            {
-                animator.SetFloat("Move_n", .9f);
-                animator.SetTrigger("Attack");
-                attack = true;
-            }
-        }*/
-    }
-
-    private void Action () {
-        if (action%5 == 0 ){
-            crouch = true;
-        }
-        if (action%4 == 0 ){
-            jump = true;
-            animator.SetBool("IsJumping", true);
-        }
-        if (action%1 == 0) {
-            Moving();
-        }
-
-        crouch = false;
-        action++;
-
-    }
-
-    public void Moving() {
-        Vector2 position_player = player.transform.position;
-        Vector2 position_enemy = this.transform.position;
-
-        if (Math.Abs(position_enemy.x - position_player.x) < 1) 
-            right = 0;
-        else 
-            right = position_enemy.x<position_player.x ? 1 : -1;
-        
-        horizontalMove = right * runSpeed;
-        Debug.Log(position_enemy.x - position_player.x);
+        else  
+            horizontalMove = right * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
     }
 
@@ -137,9 +108,6 @@ public class EnemyMovement : MonoBehaviour
 	}
     void FixedUpdate()
     {   
-        // Move our character
-		if(attack)
-			return;
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
     }

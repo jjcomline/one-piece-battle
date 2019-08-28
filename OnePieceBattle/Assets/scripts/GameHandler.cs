@@ -5,18 +5,98 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameHandler : MonoBehaviour {
     
+    public GameObject BarPlayer; 
+    public GameObject BarEnemy; 
     [SerializeField] private HealthBar HealthBarPlayer; 
     [SerializeField] private HealthBar HealthBarEnemy; 
     [SerializeField] private PowerBar PowerBarPlayer; 
     [SerializeField] private PowerBar PowerBarEnemy; 
-    public GameObject PlayerPrefab, EnemyPrefab;
+    public Image Luffy_Image, Magellan_Image, Zoro_Image;
+    public GameObject LuffyPrefab, MagellanPrefab, ZoroPrefab, PlayerPrefab, EnemyPrefab;
     public RectTransform mPanelGameOver;
+    public RectTransform PanelStartMenu;
     public Text mTxtGameOver;
     public Text timer;
     public float time = 100;
     public bool gameOver;
+    int character;
+    bool startMenu;
 
     void Start() {
+        character = 0;
+        startMenu = true;
+        PanelStartMenu.gameObject.SetActive(true);
+        BarPlayer.SetActive(false);
+        BarEnemy.SetActive(false);
+        timer.gameObject.SetActive(false);
+        mPanelGameOver.gameObject.SetActive(false);
+        mTxtGameOver.gameObject.SetActive(false);
+        setOpacity();
+    }
+
+    void Update()
+    {
+        if (startMenu){
+            if(Input.GetButtonDown("Horizontal")){
+                character = character + (int)Input.GetAxisRaw("Horizontal");
+                if (character == 3)
+                    character = 0;
+                if (character == -1)
+                    character = 2;
+                setOpacity();
+            }
+            if(Input.GetButtonDown("Jump")){
+                setPlayer();
+            }
+        }
+
+
+    }
+    void setOpacity(){
+        Color opaque = new Color(1f,1f,1f,.5f);
+        Color full = new Color(1f,1f,1f,1f);
+        if(character == 1){
+            Luffy_Image.color = full;
+            Magellan_Image.color = opaque;
+            Zoro_Image.color = opaque;
+        }
+        if(character == 0){
+            Magellan_Image.color = full;
+            Luffy_Image.color = opaque;
+            Zoro_Image.color = opaque;
+        }
+        if(character == 2){
+            Magellan_Image.color = opaque;
+            Luffy_Image.color = opaque;
+            Zoro_Image.color = full;
+        }
+    }
+    void setPlayer(){
+        if (character == 0)
+            PlayerPrefab = MagellanPrefab;
+        if (character == 1)
+            PlayerPrefab = LuffyPrefab;
+        if (character == 2)
+            PlayerPrefab = ZoroPrefab;
+        float rand = UnityEngine.Random.Range(0f, 1f);
+
+        if (rand < 0.33f)
+            EnemyPrefab = MagellanPrefab;
+        if (rand < 0.66f && rand >= 0.33f)
+            EnemyPrefab = LuffyPrefab;
+        if  (rand >= 0.66f)
+            EnemyPrefab = ZoroPrefab;
+        startMenu = false;
+        setGame();
+
+
+    }
+    private void setGame() {
+        PanelStartMenu.gameObject.SetActive(false);
+        BarPlayer.SetActive(true);
+        BarEnemy.SetActive(true);
+        timer.gameObject.SetActive(true);
+        time = 100;
         gameOver = false;
         GameObject player = Instantiate(PlayerPrefab, new Vector2(-7.5f, 0f), Quaternion.identity);
         player.tag = "player";
@@ -40,17 +120,7 @@ public class GameHandler : MonoBehaviour {
         player.SetActive(true);
         enemy.SetActive(true);
 
-        mPanelGameOver.gameObject.SetActive(false);
-        mTxtGameOver.gameObject.SetActive(false);
-
         InvokeRepeating("Count", 0.0f, 1.0f);
-       
-    }
-
-    void Update()
-    {
-       
-
     }
 
     private void Count() {
@@ -83,25 +153,18 @@ public class GameHandler : MonoBehaviour {
         if(energy > 0)
             TryAttack(energy, isPlayer);
 
-        if (isPlayer) {
-            if(!SetHealthBar(damage, !isPlayer)){
-                gameOver = false;
-                showWinOrLoose(gameOver);
-            }    
-        }
-        else {
-            if(!SetHealthBar(damage, isPlayer)){
-                gameOver = true;
-                showWinOrLoose(gameOver);
-            }    
-        }     
+        if(!SetHealthBar(damage, isPlayer)){
+            gameOver = !isPlayer;
+            showWinOrLoose(gameOver);
+        }    
+
     }
 
     private bool SetHealthBar (int damage, bool isPlayer) {
         if (isPlayer)
-            return HealthBarPlayer.setHealth(damage); 
+            return HealthBarEnemy.setHealth(damage); 
         else
-            return HealthBarEnemy.setHealth(damage);
+            return HealthBarPlayer.setHealth(damage);
     }
 
     private void setColorTimer (string color) {

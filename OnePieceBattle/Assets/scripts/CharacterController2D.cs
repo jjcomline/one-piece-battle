@@ -27,12 +27,12 @@ public class CharacterController2D : MonoBehaviour
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-		if (OnLandEvent == null)
+	/*	if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
 		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
-	}
+			OnCrouchEvent = new BoolEvent();*/
+	} 
 
 	private void FixedUpdate()
 	{
