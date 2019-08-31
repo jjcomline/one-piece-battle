@@ -12,7 +12,7 @@ public class Magellan_Moves : MonoBehaviour, IChar
     Collider2D coll;
     const float runSpeed = 15f;
     const float jumpForce = 350f;
-    const int maxHealth = 250;
+    const int maxHealth = 300;
     const int maxPower = 100;
     bool isPlayer;
 
@@ -41,6 +41,13 @@ public class Magellan_Moves : MonoBehaviour, IChar
     }
     public void Move3(GameObject gmOb)
     {   
+        int facingRight;
+        if (transform.localScale.x > 0)
+            facingRight = 1;
+        else
+            facingRight = -1;
+        Rigidbody2D rb2d = gmOb.GetComponent<Rigidbody2D>();
+        rb2d.AddForce(new Vector2(facingRight * 5f, 2f), ForceMode2D.Impulse);
         StartCoroutine(Delay(2.8f));
     }
     public bool SetAttack(int a)
@@ -48,31 +55,27 @@ public class Magellan_Moves : MonoBehaviour, IChar
         move = a;
         if (move == 1)
         {
-            damage = 3;
-            energy = 5;
+            damage = 6;
+            energy = 6;
         }
-        else if (move == 2)
-        {
-            damage = 15;
-            energy = -20;
-            if (!gameHandler.TryAttack(energy, isPlayer))
+        if (move == 2)
+        {            
+            if (!gameHandler.TryAttack(-20, isPlayer))
             {
                 return false;
             }
+            damage = 14;
+            energy = -20;
         }
-        else if (move == 3)
+        if (move == 3)
         {   
-            string who;
-            damage = 35;
-            energy = -70;
 
-            who = isPlayer ? "enemy" : "player"; 
-
-            if (gameHandler.TryAttack(energy, isPlayer))
+            if (!gameHandler.TryAttack(-70, isPlayer))
             {   
-                Move3(GameObject.FindWithTag(who));
+                return false;
             }
-            else return false;
+            damage = 90;
+            energy = -90;
 
         }
         return true;

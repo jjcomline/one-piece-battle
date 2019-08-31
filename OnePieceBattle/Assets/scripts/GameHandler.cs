@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 public class GameHandler : MonoBehaviour {
     
     public GameObject BarPlayer; 
@@ -13,25 +14,41 @@ public class GameHandler : MonoBehaviour {
     [SerializeField] private PowerBar PowerBarEnemy; 
     public Image Luffy_Image, Magellan_Image, Zoro_Image;
     public GameObject LuffyPrefab, MagellanPrefab, ZoroPrefab, PlayerPrefab, EnemyPrefab;
-    public RectTransform mPanelGameOver;
+    public RectTransform PanelGameOver;
     public RectTransform PanelStartMenu;
-    public Text mTxtGameOver;
+    GameObject player;
+    GameObject enemy;
+    public Button Retry;
+    public Text TxtGameOver;
     public Text timer;
-    public float time = 100;
+    public float time;
     public bool gameOver;
     int character;
     bool startMenu;
+    bool theEnd;
+    int level = 0; 
 
     void Start() {
-        character = 0;
-        startMenu = true;
-        PanelStartMenu.gameObject.SetActive(true);
+        Time.timeScale = 1;
+        setEnemy();
+        theEnd = false;
         BarPlayer.SetActive(false);
         BarEnemy.SetActive(false);
         timer.gameObject.SetActive(false);
-        mPanelGameOver.gameObject.SetActive(false);
-        mTxtGameOver.gameObject.SetActive(false);
-        setOpacity();
+        PanelGameOver.gameObject.SetActive(false);
+
+        if (level == 0){
+            character = 0;
+            startMenu = true;
+            PanelStartMenu.gameObject.SetActive(true);
+            setOpacity();
+        }
+        if (level == 1 || level == 2)
+            setGame();
+        if (level == 3) {
+            theEnd = true;
+        }
+        level ++;
     }
 
     void Update()
@@ -47,6 +64,8 @@ public class GameHandler : MonoBehaviour {
             }
             if(Input.GetButtonDown("Jump")){
                 setPlayer();
+                startMenu = false;
+                setGame();
             }
         }
 
@@ -78,29 +97,26 @@ public class GameHandler : MonoBehaviour {
             PlayerPrefab = LuffyPrefab;
         if (character == 2)
             PlayerPrefab = ZoroPrefab;
-        float rand = UnityEngine.Random.Range(0f, 1f);
-
-        if (rand < 0.33f)
-            EnemyPrefab = MagellanPrefab;
-        if (rand < 0.66f && rand >= 0.33f)
-            EnemyPrefab = LuffyPrefab;
-        if  (rand >= 0.66f)
-            EnemyPrefab = ZoroPrefab;
-        startMenu = false;
-        setGame();
-
-
     }
-    private void setGame() {
+
+    void setEnemy() {
+         //float rand = UnityEngine.Random.Range(0f, 1f);
+        if (level == 0)
+            EnemyPrefab = MagellanPrefab;
+        if (level == 1)
+            EnemyPrefab = LuffyPrefab;
+        if (level == 2)
+            EnemyPrefab = ZoroPrefab;
+    }
+
+    public void setGame() {
         PanelStartMenu.gameObject.SetActive(false);
-        BarPlayer.SetActive(true);
-        BarEnemy.SetActive(true);
-        timer.gameObject.SetActive(true);
         time = 100;
+        timer.gameObject.SetActive(true);
         gameOver = false;
-        GameObject player = Instantiate(PlayerPrefab, new Vector2(-7.5f, 0f), Quaternion.identity);
+        player = Instantiate(PlayerPrefab, new Vector2(-7.5f, 0f), Quaternion.identity);
         player.tag = "player";
-        GameObject enemy = Instantiate(EnemyPrefab, new Vector2(7.5f, 0f), Quaternion.identity);
+        enemy = Instantiate(EnemyPrefab, new Vector2(7.5f, 0f), Quaternion.identity);
         enemy.tag = "enemy";
         player.SetActive(false);
         enemy.SetActive(false);
@@ -115,6 +131,8 @@ public class GameHandler : MonoBehaviour {
         HealthBarEnemy.resetHealth(opponent.Health);
         PowerBarPlayer.resetPower(character.Power);
         PowerBarEnemy.resetPower(opponent.Power);
+        BarPlayer.SetActive(true);
+        BarEnemy.SetActive(true);
         character.IsPlayer = true;
         opponent.IsPlayer = false;
         player.SetActive(true);
@@ -175,12 +193,37 @@ public class GameHandler : MonoBehaviour {
     }
 
     private void showWinOrLoose(bool GameOver) {
-        mPanelGameOver.gameObject.SetActive(true);
-        mTxtGameOver.gameObject.SetActive(true);
-        mTxtGameOver.text = GameOver ? "You Loose" : "You Win";
-        CancelInvoke("Count");
-        Time.timeScale = 0;
-        //UnityEditor.EditorApplication.isPlaying = false;
+        if (GameOver || (!GameOver && level == 3)) {
+            PanelGameOver.gameObject.SetActive(true);
+            TxtGameOver.text = GameOver ? "You Loose" : "You Win";
+            theEnd = true;
+            CancelInvoke("Count");
+            Time.timeScale = 0;
+        }
+        else {
+            Destroy(player);
+            Destroy(enemy);
+            Start();
+            theEnd = false;
+        }
+
     }
+
+    void OnGUI() {	
+        if (theEnd){
+            string message;
+            message = "Click to Play Again";
+            Rect startButton = new Rect(Screen.width/2 - 170, Screen.height/2 + 100, 340, 50);
+            if(GUI.Button(startButton, message)) {
+                Destroy(player);
+                Destroy(enemy);
+                level = 0;
+                Start();
+                theEnd = false;
+            }
+        }
+	}
+
+
 }
 

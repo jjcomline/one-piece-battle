@@ -13,7 +13,7 @@ public class Zoro_Moves : MonoBehaviour,IChar
     const float runSpeed = 30f;
     const float jumpForce = 400f;
     const int maxHealth = 230;
-    const int maxPower = 80;
+    const int maxPower = 100;
     bool isPlayer;
 
     public GameHandler GameHandler {set => gameHandler = value; }
@@ -41,6 +41,13 @@ public class Zoro_Moves : MonoBehaviour,IChar
     }
     public void Move3(GameObject gmOb)
     {   
+        int facingRight;
+        if (transform.localScale.x > 0)
+            facingRight = 1;
+        else
+            facingRight = -1;
+        Rigidbody2D rb2d = gmOb.GetComponent<Rigidbody2D>();
+        rb2d.AddForce(new Vector2(facingRight * 5f, 2f), ForceMode2D.Impulse);
         StartCoroutine(Delay(3f));
     }
     public bool SetAttack(int a)
@@ -48,30 +55,28 @@ public class Zoro_Moves : MonoBehaviour,IChar
         move = a;
         if (move == 1)
         {
-            damage = 3;
+            damage = 10;
             energy = 5;
         }
-        else if (move == 2)
+        if (move == 2)
         {
-            damage = 15;
-            energy = -20;
-            if (!gameHandler.TryAttack(energy, isPlayer))
+            
+            if (!gameHandler.TryAttack(-20, isPlayer))
             {
                 return false;
             }
+            damage = 15;
+            energy = -20;
         }
-        else if (move == 3)
+
+        if (move == 3)
         {   
-            string who;
-            damage = 35;
-            energy = -70;
-
-            who = isPlayer ? "enemy" : "player"; 
-
-            if (!gameHandler.TryAttack(energy, isPlayer))
+            if (!gameHandler.TryAttack(-70, isPlayer))
             {   
                 return false;
             }
+            damage = 50;
+            energy = -50;
 
         }
         return true;

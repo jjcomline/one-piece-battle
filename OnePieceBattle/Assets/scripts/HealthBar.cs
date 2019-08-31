@@ -16,7 +16,10 @@ public class HealthBar : MonoBehaviour
         animator.SetInteger("Danger_1", (int)(sizeNormalized*100));
         bar.localScale = new Vector3(sizeNormalized, 1f);
     }
-    public void resetHealth(int maxHealth) => health = this.maxHealth = maxHealth;
+    public void resetHealth(int maxHealth) {
+        health = this.maxHealth = maxHealth;
+        SetSize(1);
+    } 
     
     public bool setHealth(int damage)
     {

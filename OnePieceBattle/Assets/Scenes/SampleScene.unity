@@ -2390,9 +2390,10 @@ MonoBehaviour:
     type: 3}
   PlayerPrefab: {fileID: 0}
   EnemyPrefab: {fileID: 0}
-  mPanelGameOver: {fileID: 1129956168}
+  PanelGameOver: {fileID: 1129956168}
   PanelStartMenu: {fileID: 715203317}
-  mTxtGameOver: {fileID: 729508921}
+  Retry: {fileID: 0}
+  TxtGameOver: {fileID: 729508921}
   timer: {fileID: 1602456824}
   time: 100
   gameOver: 0

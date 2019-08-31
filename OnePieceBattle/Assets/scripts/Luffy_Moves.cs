@@ -26,6 +26,7 @@ public class Luffy_Moves : MonoBehaviour,IChar
 
     public void Move1(GameObject gmOb)
     {
+        gameHandler.Attack(damage, energy, isPlayer);
         StartCoroutine(Delay(0.6f));
     }
     public void Move2(GameObject gmOb)
@@ -41,59 +42,36 @@ public class Luffy_Moves : MonoBehaviour,IChar
     }
     public void Move3(GameObject gmOb)
     {   
-        float facingRight;
-        if (transform.localScale.x > 0)
-            facingRight = 1f;
-        else
-            facingRight = -1f;
-        Vector2 position = gmOb.transform.position;
-        this.transform.position = position - new Vector2(facingRight, 0f);
+        gameHandler.Attack(damage, energy, isPlayer);
         StartCoroutine(Delay(7));
     }
     public bool SetAttack(int a)
     {
         move = a;
-        if (coll != null)
-            Destroy(coll);
-        BoxCollider2D box;
         if (move == 1)
         {
             damage = 3;
-            energy = 5;
-            box = Bullet.AddComponent<BoxCollider2D>();
-            box.size = new Vector2(.028f, .01f);
-            box.offset = new Vector2(.021f, .032f);
-            coll = box;
+            energy = 8;
         }
-        else if (move == 2)
+        if (move == 2)
         {
-            damage = 15;
-            energy = -20;
-            if (gameHandler.TryAttack(energy, isPlayer))
+            if (!gameHandler.TryAttack(-20, isPlayer))
             {
-                box = Bullet.AddComponent<BoxCollider2D>();
-                box.size = new Vector2(.03f, .02f);
-                box.offset = new Vector2(.0014f, .003f);
-                coll = box;
+                return false;
             }
-            else return false;
+            damage = 20;
+            energy = -30;
         }
-        else if (move == 3)
+
+        if (move == 3)
         {   
-            string who;
-            damage = 100;
-            energy = -70;
-
-            who = isPlayer ? "enemy" : "player"; 
-
-            if (gameHandler.TryAttack(energy, isPlayer))
+            if (!gameHandler.TryAttack(-70, isPlayer))
             {   
-                Move3(GameObject.FindWithTag(who));
+                return false;
             }
-            else return false;
-
+            damage = 70;
+            energy = -70;
         }
-        coll.isTrigger = true;
         return true;
 
     }
@@ -101,6 +79,6 @@ public class Luffy_Moves : MonoBehaviour,IChar
     IEnumerator Delay(float time)
     {
         yield return new WaitForSeconds(time);
-        gameHandler.Attack(damage, energy, isPlayer);
+        
     }
 }

@@ -25,6 +25,7 @@ public class PowerBar : MonoBehaviour
     public void resetPower(int maxPower){
         power = 0;
         this.maxPower = maxPower;
+        SetSize(0f);
     }
 
     public bool setPower(int energy) {

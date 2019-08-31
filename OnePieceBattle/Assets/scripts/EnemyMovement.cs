@@ -69,19 +69,19 @@ public class EnemyMovement : MonoBehaviour
         right = position_enemy.x<position_player.x ? 1 : -1;
         if (Math.Abs(distance) < 1) {
             horizontalMove = right*0.001f;
-            if (UnityEngine.Random.Range(0f, 1f)<0.1f && character.SetAttack(2) && !crouch && !jump)
+            if (!crouch && !jump && !attack && UnityEngine.Random.Range(0f, 1f)<0.1f  && character.SetAttack(2)) 
             {
                 animator.SetFloat("Move_n", .5f);
                 animator.SetTrigger("Attack");
                 attack = true;
             }
-            else if (character.SetAttack(3) && !crouch && !jump)
+            if (!crouch && !attack && character.SetAttack(3))
             {
                 animator.SetFloat("Move_n", .9f);
                 animator.SetTrigger("Attack");
                 attack = true;
             }
-            else if (character.SetAttack(1) && !crouch)
+            else if (!jump && !crouch && !attack && character.SetAttack(1) )
 			{
 				animator.SetFloat("Move_n", .2f);
 				animator.SetTrigger("Attack");
@@ -96,6 +96,7 @@ public class EnemyMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+        jump = false;
     }
 
     public void OnCrouching(bool isCrouching)
@@ -109,6 +110,6 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {   
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        //jump = false;
     }
 }
