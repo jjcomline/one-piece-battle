@@ -23,12 +23,13 @@ public class GameHandler : MonoBehaviour {
     public Text timer;
     public float time;
     public bool gameOver;
-    int character;
+    int character_number = -1;
     bool startMenu;
     bool theEnd;
     int level = 0; 
 
     void Start() {
+
         Time.timeScale = 1;
         setEnemy();
         theEnd = false;
@@ -38,10 +39,9 @@ public class GameHandler : MonoBehaviour {
         PanelGameOver.gameObject.SetActive(false);
 
         if (level == 0){
-            character = 0;
             startMenu = true;
             PanelStartMenu.gameObject.SetActive(true);
-            setOpacity();
+            //setOpacity();
         }
         if (level == 1 || level == 2)
             setGame();
@@ -54,15 +54,22 @@ public class GameHandler : MonoBehaviour {
     void Update()
     {
         if (startMenu){
-            if(Input.GetButtonDown("Horizontal")){
-                character = character + (int)Input.GetAxisRaw("Horizontal");
-                if (character == 3)
-                    character = 0;
-                if (character == -1)
-                    character = 2;
-                setOpacity();
+            character_number = -1;
+            if(Magellan_Image.GetComponent<Joybutton>().Pressed) {  //Input.GetButtonDown("Horizontal")
+                Magellan_Image.GetComponent<Joybutton>().Pressed=false;
+                character_number = 0;
             }
-            if(Input.GetButtonDown("Jump")){
+            if(Luffy_Image.GetComponent<Joybutton>().Pressed) {  //Input.GetButtonDown("Horizontal")
+                Luffy_Image.GetComponent<Joybutton>().Pressed=false;
+                character_number = 1;
+            }
+            if(Zoro_Image.GetComponent<Joybutton>().Pressed){   //Input.GetButtonDown("Horizontal")
+                Zoro_Image.GetComponent<Joybutton>().Pressed=false;
+                character_number = 2;
+            }
+                //setOpacity();
+            if (character_number >  -1){
+                Debug.Log(character_number);
                 setPlayer();
                 startMenu = false;
                 setGame();
@@ -74,28 +81,28 @@ public class GameHandler : MonoBehaviour {
     void setOpacity(){
         Color opaque = new Color(1f,1f,1f,.5f);
         Color full = new Color(1f,1f,1f,1f);
-        if(character == 1){
+        if(character_number == 1){
             Luffy_Image.color = full;
             Magellan_Image.color = opaque;
             Zoro_Image.color = opaque;
         }
-        if(character == 0){
+        if(character_number == 0){
             Magellan_Image.color = full;
             Luffy_Image.color = opaque;
             Zoro_Image.color = opaque;
         }
-        if(character == 2){
+        if(character_number == 2){
             Magellan_Image.color = opaque;
             Luffy_Image.color = opaque;
             Zoro_Image.color = full;
         }
     }
     void setPlayer(){
-        if (character == 0)
+        if (character_number == 0)
             PlayerPrefab = MagellanPrefab;
-        if (character == 1)
+        if (character_number == 1)
             PlayerPrefab = LuffyPrefab;
-        if (character == 2)
+        if (character_number == 2)
             PlayerPrefab = ZoroPrefab;
     }
 
@@ -142,19 +149,22 @@ public class GameHandler : MonoBehaviour {
     }
 
     private void Count() {
-        if (timer.text == "50") {
+
+        if(time  > 97){
+             setColorTimer("black");
+        }
+        if (time == 50) {
             setColorTimer("yellow");
         }
 
-        if (timer.text == "20") {
+        if (time == 20) {
             setColorTimer("red");
         }
 
-        if (timer.text == "0") {
+        if (time == 0) {
             gameOver = true;
             showWinOrLoose(gameOver);
             return;
-
         }
         time --;
         timer.text = ((int)time).ToString();
@@ -190,6 +200,8 @@ public class GameHandler : MonoBehaviour {
             timer.color = Color.yellow;
         if (color == "red")
             timer.color = Color.red;
+        if (color == "black")
+            timer.color = Color.black;
     }
 
     private void showWinOrLoose(bool GameOver) {
@@ -203,23 +215,22 @@ public class GameHandler : MonoBehaviour {
         else {
             Destroy(player);
             Destroy(enemy);
-            Start();
             theEnd = false;
+            Start();
+            
         }
 
     }
 
     void OnGUI() {	
         if (theEnd){
-            string message;
-            message = "Click to Play Again";
-            Rect startButton = new Rect(Screen.width/2 - 170, Screen.height/2 + 100, 340, 50);
-            if(GUI.Button(startButton, message)) {
+            Rect startButton = new Rect(Screen.width/2 - 220, Screen.height/2 + 70, 440, 140);
+            if(GUI.Button(startButton, "<size=40>Click to Play Again</size>")) {
                 Destroy(player);
                 Destroy(enemy);
                 level = 0;
-                Start();
                 theEnd = false;
+                Start();
             }
         }
 	}

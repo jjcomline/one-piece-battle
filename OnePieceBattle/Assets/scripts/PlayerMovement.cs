@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
     public float runSpeed;
+    protected Joystick joystick;
+    public Joybutton move1;
+    public Joybutton move2;
+    public Joybutton finalMove;
 
     float horizontalMove = 0f;
     bool jump = false;
@@ -36,51 +40,56 @@ public class PlayerMovement : MonoBehaviour
         hit_Controller.Move3.AddListener(character.Move3);
         hit_Controller.OnMoveFinished = new UnityEvent();
         hit_Controller.OnMoveFinished.AddListener(OnMoveFinished);
+        joystick = FindObjectOfType<Joystick>();
+        move1 = GameObject.FindWithTag("move1").GetComponent<Joybutton>();
+        move2 = GameObject.FindWithTag("move2").GetComponent<Joybutton>();
+        finalMove = GameObject.FindWithTag("finalMove").GetComponent<Joybutton>();
+        
     }
     // Update is called once per frame
     public virtual void Update()
     {
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
+        //horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = joystick.Horizontal * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump"))
+        if (joystick.Vertical > 0.5) //Input.GetButtonDown("Jump")
         {
             jump = true;
             animator.SetBool("IsJumping", true);
         }
 
-        if (Input.GetButtonDown("Crouch"))
+        if (joystick.Vertical < -0.5 )  // Input.GetButtonDown("Crouch")
         {
             crouch = true;
         }
-        else if (Input.GetButtonUp("Crouch"))
+        else // if (Input.GetButtonUp("Crouch"))
         {
             crouch = false;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (move1.Pressed) //Input.GetButtonDown("Fire1")
         {
-			if(character.SetAttack(1) && !crouch)
+			if(!attack && !crouch && character.SetAttack(1) )
 			{
 				animator.SetFloat("Move_n", .2f);
 				animator.SetTrigger("Attack");
 				attack = true;
 			}
         }
-        if (Input.GetButtonDown("Fire2") && !crouch)
+        if (move2.Pressed)
         {
-            if(character.SetAttack(2))
+            if(!attack && !crouch && character.SetAttack(2))
 			{	
 				animator.SetFloat("Move_n", .5f);
 				animator.SetTrigger("Attack");
 				attack = true;
 			}
         }
-        if (Input.GetButtonDown("Fire3") && !crouch)
+        if (finalMove.Pressed )
         {
-            if (character.SetAttack(3))
+            if (!attack && !crouch && character.SetAttack(3))
             {
                 animator.SetFloat("Move_n", .9f);
                 animator.SetTrigger("Attack");

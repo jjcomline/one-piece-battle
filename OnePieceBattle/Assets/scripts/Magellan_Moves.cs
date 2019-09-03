@@ -11,7 +11,7 @@ public class Magellan_Moves : MonoBehaviour, IChar
     public GameObject bullet;
     Collider2D coll;
     const float runSpeed = 15f;
-    const float jumpForce = 350f;
+    const float jumpForce = 450f;
     const int maxHealth = 300;
     const int maxPower = 100;
     bool isPlayer;

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - enemy
   - player
+  - move1
+  - move2
+  - finalMove
   layers:
   - Default
   - TransparentFX
